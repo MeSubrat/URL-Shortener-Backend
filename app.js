@@ -5,25 +5,27 @@ const connectDb = require('./config/dbconfig');
 const urlRoutes = require('./Routes/url.routes');
 const authRoutes = require('./Routes/auth.routes');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
 corsOptions = {
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin: 'http://localhost:5173',
     optionsSuccessStatus: 200,
-    credential: true,
+    credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
     method: ['GET', 'POST', 'PUT', 'DELETE'],
 }
 
 
+app.use(express.json());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(cookieParser());
 
 connectDb();
 app.get('/', (req, res) => {
-    res.send("Server is working.")
+    res.send("Server is working.")  
 })
 
 app.use(urlRoutes);

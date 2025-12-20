@@ -1,6 +1,12 @@
 const User = require("../model/user.model");
 const bcrypt = require('bcrypt');
 const generateJwtToken = require("../utils/helper");
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+}
 
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
@@ -29,18 +35,23 @@ const loginUser = async (req, res) => {
     if (!match) return res.status(400).json({ message: "Invalid Credentials." });
 
     const token = generateJwtToken(requiredUser._id);
-    res.cookie("jwtToken", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
+    res.cookie("jwtToken", token, cookieOptions);
 
 
-    res.status(200).json({ message: "Login Success", user: { id: requiredUser._id, email: requiredUser.email } });
+    res.status(200).json({ message: "Login Success", user: { id: requiredUser._id, email: requiredUser.email }, token });
+}
+
+const logoutUser = async (req, res) => {
+    try {
+        res.clearCookie("jwtToken", cookieOptions);
+        res.status(200).json({ message: "Logout successful." })
+    } catch (error) {
+        res.status(400).json({ Error: error });
+    }
 }
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }

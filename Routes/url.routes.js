@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { createShortUrl,redirectToUrl } = require('../Controller/url.controller');
+const { createShortUrl, redirectToUrl, getAllUrls } = require('../Controller/url.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
-router.post('/api/create', createShortUrl);
-router.get('/:id',redirectToUrl)
+router.post('/api/create', authMiddleware, createShortUrl);
+router.get('/:id', authMiddleware, redirectToUrl);
+router.get('/api/urls', authMiddleware, getAllUrls);
 
 module.exports = router;
