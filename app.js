@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
     origin: [
         'http://localhost:5173',
-        'https://url-shortener-frontend-dav1jhomz.vercel.app'
+        'https://url-shortener-frontend-ejac.vercel.app'
     ],
     optionsSuccessStatus: 200,
     credentials: true,
@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 connectDb();
 app.get('/', (req, res) => {
-    res.send("Server is working.")  
+    res.send("Server is working.")
 })
 
 app.use(urlRoutes);
