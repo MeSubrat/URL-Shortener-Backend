@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
     origin: [
         'http://localhost:5173',
-        'https://url-shortener-frontend-ghaagmvhp.vercel.app'
+        'https://url-shortener-frontend-dav1jhomz.vercel.app'
     ],
     optionsSuccessStatus: 200,
     credentials: true,
