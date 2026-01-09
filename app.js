@@ -9,12 +9,15 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-corsOptions = {
-    origin: ['http://localhost:5173','https://url-shortener-git-b5930b-subrat-kumar-sahoos-projects-899b7b7f.vercel.app'],
+const corsOptions = {
+    origin: [
+        'http://localhost:5173',
+        'https://url-shortener-git-b5930b-subrat-kumar-sahoos-projects-899b7b7f.vercel.app'
+    ],
     optionsSuccessStatus: 200,
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
-    method: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }
 
 
