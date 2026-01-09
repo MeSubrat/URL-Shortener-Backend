@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 const corsOptions = {
     origin: [
         'http://localhost:5173',
-        'https://url-shortener-git-b5930b-subrat-kumar-sahoos-projects-899b7b7f.vercel.app'
+        'https://url-shortener-frontend-ghaagmvhp.vercel.app/'
     ],
     optionsSuccessStatus: 200,
     credentials: true,
